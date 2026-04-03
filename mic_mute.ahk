@@ -12,8 +12,7 @@ global devicesInfo := 0
   global muteInfo
   Infos.DestroyAll()
   mute := SoundGetMute(, "Microphone:1")
-  msg := Format("Microphone {1}", mute ? "U" : "M")
   SoundSetMute(-1,, "Microphone:1")
-  muteInfo := Info(msg,, "Screen",)
+  muteInfo := Info(Format("Microphone {1}", mute ? "U" : "M"),, "Screen",)
 }
 
