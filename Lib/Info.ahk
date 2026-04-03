@@ -110,7 +110,7 @@ class Infos {
 		}
 
 		Infos.spots[this.loc+1][this.spaceIndex] := false
-		return Infos(newText, this.autoCloseTimeout,, this.loc)
+		return Infos(newText, this.autoCloseTimeout, this.coordMode, this.loc)
 	}
 
 	Destroy(*) {
