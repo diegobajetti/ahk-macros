@@ -1,6 +1,6 @@
 ﻿#NoEnv
 SetWorkingDir %A_ScriptDir%
-; #IfWinActive ahk_class Red Dead Redemption 2
+#IfWinActive ahk_class RDR2.exe
 #SingleInstance, force
 
 Cook := "["
