@@ -1,15 +1,16 @@
 ﻿#NoEnv
 SetWorkingDir %A_ScriptDir%
-#IfWinActive ahk_class grcWindow
+#IfWinActive ahk_exe GTA5_Enhanced.exe
 #SingleInstance, force
 if not A_IsAdmin
   Run *RunAs "%A_ScriptFullPath%"
 
+KeepAwake := "+f13"
 BST := "["
 Armor := "]"
 Snack := "\"
-Outfit := "F9"
-CallSimeon := "F12"
+Outfit := "f9"
+CallSimeon := "f12"
 IncInventoryLocation := "'"
 DecInventoryLocation := ";"
 NoSaveModeOn := ">^f9"
@@ -17,20 +18,24 @@ NoSaveModeOff := ">^f12"
 InternetKillSwitchOn := ">^f5"
 InternetKillSwitchOff := ">^f6"
 
-global InvLocation := 3
+global KeepAwakeBool := false
+global InvLocation := 4
 
 global ToolTip1 := false
 global ToolTip2 := false
 global ToolTip3 := false
 
+EnterKey := "XButton1"
 Interaction := "XButton2"
 
 global IntMenuDelay := 0.1
-global KeySendDelay := 0.1
-global KeyPressDuration := 4
-global PhoneMenuDelay := 500
-global PhoneScrollDelay := 45
+global KeySendDelay := 50
+global KeyPressDuration := 15
+global PhoneMenuDelay := 550
+global PhoneScrollDelay := 55
 
+Hotkey, %EnterKey%, EnterKey
+Hotkey, %KeepAwake%, KeepAwake
 Hotkey, %BST%, BST
 Hotkey, %Armor%, Armor
 Hotkey, %Snack%, Snack
@@ -47,6 +52,27 @@ F1::suspend
   return
   setkeydelay, KeySendDelay, KeyPressDuration
 
+EnterKey:
+  Send {Enter down}
+  Sleep 50
+  Send {Enter up}
+  return
+
+KeepAwake:
+  KeepAwakeBool := !KeepAwakeBool
+  if (KeepAwakeBool) {
+    SetTimer, SendKeepAwake, 60000
+    TrayTip, Keep-Awake, ACTIVATED, 1
+  } else {
+    SetTimer, SendKeepAwake, Off
+    TrayTip, Keep-Awake, DEACTIVATED, 1
+  }
+  return
+
+SendKeepAwake:
+  Send {NumpadAdd}
+  return
+
 BST:
   Send {%Interaction%}
   sleep, IntMenuDelay
@@ -56,13 +82,13 @@ BST:
 Armor:
   Send {%Interaction%}
   sleep, IntMenuDelay
-  Send {down %InvLocation%}{enter}{down 4}{enter}{up 3}
+  Send {down %InvLocation%}{enter}{down 1}{enter}{up 3}{enter}{%Interaction%}
   return
 
 Snack:
   Send {%Interaction%}
   sleep, IntMenuDelay
-  Send {down %InvLocation%}{enter}{down 5}{enter 4}{%Interaction%}
+  Send {down %InvLocation%}{enter}{down 2}{enter 4}{%Interaction%}
   return
 
 Outfit:
@@ -128,9 +154,8 @@ NoSaveModeOff:
 InternetKillSwitchOn:
   run, *runas %comspec% /c netsh interface set interface name="Wi-Fi" admin=disabled,,hide
   run, *runas %comspec% /c netsh interface set interface name="Ethernet" admin=disabled,,hide
-  run, *runas %comspec% /c netsh interface set interface name="Ethernet 3" admin=disabled,,hide
+  run, *runas %comspec% /c netsh interface set interface name="Ethernet 2" admin=disabled,,hide
   run, *runas %comspec% /c netsh interface set interface name="vEthernet (Default Switch)" admin=disabled,,hide
-  run, *runas %comspec% /c netsh interface set interface name="vEthernet (WSL)" admin=disabled,,hide
 
   ToolTip3 := true
   n := getActiveToolTips()
@@ -142,9 +167,8 @@ InternetKillSwitchOn:
 InternetKillSwitchOff:
   run, *runas %comspec% /c netsh interface set interface name="Wi-Fi" admin=enabled,,hide
   run, *runas %comspec% /c netsh interface set interface name="Ethernet" admin=enabled,,hide
-  run, *runas %comspec% /c netsh interface set interface name="Ethernet 3" admin=enabled,,hide
+  run, *runas %comspec% /c netsh interface set interface name="Ethernet 2" admin=enabled,,hide
   run, *runas %comspec% /c netsh interface set interface name="vEthernet (Default Switch)" admin=enabled,,hide
-  run, *runas %comspec% /c netsh interface set interface name="vEthernet (WSL)" admin=enabled,,hide
 
   n := getActiveToolTips()
   ToolTip3 := false
