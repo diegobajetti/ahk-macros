@@ -3,7 +3,6 @@
 #include Lib/Info.ahk
 
 #SingleInstance Force
-
 #HotIf WinActive('ahk_exe FiveM_b3751_GTAProcess.exe')
 XButton1::{
   Press("enter")
