@@ -3,7 +3,13 @@
 #include Lib/Info.ahk
 
 #SingleInstance Force
-#HotIf WinActive('ahk_exe FiveM_b3751_GTAProcess.exe') or WinActive('ahk_exe FiveM_b3751_GTAProcess.exe')
+#HotIf WinActive('ahk_exe FiveM_b3751_GTAProcess.exe')
+XButton1::{
+  Press("enter")
+}
+#HotIf
+
+#HotIf WinActive('ahk_exe FiveM_b3095_GTAProcess.exe')
 #Warn Unreachable, Off
 SetWorkingDir A_InitialWorkingDir
 
@@ -44,9 +50,6 @@ F2::{
   }
 }
 
-XButton1::{
-  Press("enter")
-}
 
 /**
  * @description  
