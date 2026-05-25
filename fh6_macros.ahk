@@ -47,6 +47,14 @@ E::{
   Press("right")
 }
 
+A::{
+  Press("down")
+}
+
+W::{
+  Press("up")
+}
+
 
 /**
  * @description  
