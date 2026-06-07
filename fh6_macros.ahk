@@ -35,25 +35,15 @@ F2::{
   }
 }
 
-XButton1::{
-  Press("enter")
-}
+XButton1::Enter
 
-Q::{
-  Press("left")
-}
+Q::Left
 
-E::{
-  Press("right")
-}
+E::Right
 
-A::{
-  Press("down")
-}
+S::Down
 
-W::{
-  Press("up")
-}
+W::Up
 
 
 /**
@@ -107,7 +97,7 @@ DrawRectangle(x, y, w, h, color:="Red", d:=2, showTime:=2000) {
   y -= d
   w += d * 2
   h += d * 2
-  
+
   innerW := w - (d * 2)
   innerH := h - (d * 2)
   WinSetRegion(Format(
@@ -116,7 +106,7 @@ DrawRectangle(x, y, w, h, color:="Red", d:=2, showTime:=2000) {
     w, h, d, w - d, h - d
   ), RectGui.Hwnd)
   RectGui.Show("NA x" x " y" y " w" w " h" h)
-  
+
   if (showTime > 0) {
     Sleep(showTime)
     RectGui.Destroy()
