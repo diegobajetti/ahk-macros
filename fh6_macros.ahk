@@ -142,7 +142,7 @@ VerifySelection(x, y, w:=10, h:=10, color:=0xFFFFFF, precision:=5) {
   x2 := x1 + w
   y2 := y1 + h
   Loop precision
-    if PixelSearch(&Px, &Py, x1, y1, x2, y2, color, 1) {
+    if PixelSearch(&Px, &Py, x1, y1, x2, y2, color, 10) {
       found := true
       break
     }
