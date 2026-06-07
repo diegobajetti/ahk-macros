@@ -226,21 +226,22 @@ IsOn() {
   return found
 }
 
-F13::{
+>+F13::{
   Loop {
     Press("enter", 2, 120)
     Sleep(570)
-    if !VerifySelection(133, 343, 10, 10, 0xFFFFFF) && VerifySelection(133, 397, 10, 10, 0xEADE00) {
+    if (VerifySelection(625, 437, 10, 10, 0xF7F7F7) && VerifySelection(625, 327, 10, 10, 0xEADE00)) || VerifySelection(625, 437, 10, 10, 0x1D1D1D) {
       Press("esc")
-      Sleep(600)
-      continue
+      Sleep(620)
+      Continue
     }
     Press("y")
     Sleep(140)
     Press("down")
     Sleep(120)
     Press("enter", 2, 120)
-    break
+    Break
   }
 }
 #HotIf
+
