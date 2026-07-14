@@ -118,7 +118,6 @@ class Infos {
 		catch Any {
 			return false
 		}
-		Hotkey("Escape", "Off")
 		Hotkey("^Escape", "Off")
 		if this.spaceIndex <= Infos.maxNumberedHotkeys
 			Hotkey("F" this.spaceIndex, "Off")
@@ -197,7 +196,6 @@ class Infos {
 
 	_SetupHotkeysAndEvents() {
 		HotIfWinExist("ahk_id " this.gInfo.Hwnd)
-		Hotkey("Escape", this.bfDestroy, "On")
 		Hotkey("^Escape", Infos.foDestroyAll, "On")
 		if this.spaceIndex <= Infos.maxNumberedHotkeys
 			Hotkey("F" this.spaceIndex, this.bfDestroy, "On")
