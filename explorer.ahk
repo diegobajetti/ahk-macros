@@ -5,11 +5,19 @@
 #Warn Unreachable, Off
 SetWorkingDir A_InitialWorkingDir
 
+GetExplorerPath(hWnd := WinExist("A")) {
+  for window in ComObject("Shell.Application").Windows {
+    if window.hwnd != hWnd
+      continue
+    return window.Document.Folder.Self.Path
+  }
+}
+
 ~Enter::{
-  path := ControlGetText("DirectUIHWND2")
+  path := GetExplorerPath()
   Sleep 100
-  new_path := ControlGetText("DirectUIHWND2")
-  if (new_path != path)
+  newPath := GetExplorerPath()
+  if (newPath != path)
     Send "^{Space}"
   Return
 }
